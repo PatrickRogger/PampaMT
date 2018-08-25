@@ -62,36 +62,36 @@ def make_file_pplt(path_file_zss, site, band):
 
 
     # ============= RZ xx ====================================================
-    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'ZReal', 'xx')
+    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'rhoReal', 'xx')
     window_site.RZxx = [parameter, E1]
 
     # ============= RZ xy ====================================================
-    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'ZReal', 'xy')
+    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'rhoReal', 'xy')
     window_site.RZxy = [parameter, E1]
 
     # ============= RZ yx ====================================================
-    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'ZReal', 'yx')
+    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'rhoReal', 'yx')
     window_site.RZyx = [parameter, E1]
 
     # ============= RZ yy ====================================================
-    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'ZReal', 'yy')
+    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'rhoReal', 'yy')
     window_site.RZyy = [parameter, E1]
 
 
     # ============= IZ xx ====================================================
-    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'ZImag', 'xx')
+    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'rhoImag', 'xx')
     window_site.IZxx = [parameter, E1]
 
     # ============= IZ xy ====================================================
-    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'ZImag', 'xy')
+    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'rhoImag', 'xy')
     window_site.IZxy = [parameter, E1]
 
     # ============= IZ yx ====================================================
-    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'ZImag', 'yx')
+    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'rhoImag', 'yx')
     window_site.IZyx = [parameter, E1]
 
     # ============= IZ yy ====================================================
-    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'ZImag', 'yy')
+    T, parameter, E1, E2, E3, E4 = read_file_zss(path_file_zss, 'rhoImag', 'yy')
     window_site.IZyy = [parameter, E1]
 
 

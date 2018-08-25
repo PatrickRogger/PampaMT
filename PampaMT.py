@@ -473,6 +473,7 @@ class ScreenSuper(BoxLayout):
     def on_press_plot(self):
 
         self.ids.plot_1_point.clear_widgets()
+        self.ids.plot_2_point.clear_widgets()
         self.list_active_file_pplt = []
         for band in site.files_plot.keys():
             for file_pplt in site.files_plot[band]:
@@ -502,11 +503,64 @@ class ScreenSuper(BoxLayout):
                 bt_phi_yx.height = 4
                 bt_phi_yx.width = 4
 
-                bt_rho_xy.points_inte = [bt_rho_yx, bt_phi_xy, bt_phi_yx]
-                bt_rho_yx.points_inte = [bt_rho_xy, bt_rho_xy, bt_phi_yx]
+                bt_RZ_xx = PointPlot(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[6][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                bt_RZ_xx.cor = file_pplt.obj_pplt.color
+                bt_RZ_xx.height = 4
+                bt_RZ_xx.width = 4
 
-                bt_phi_xy.points_inte = [bt_rho_xy, bt_rho_yx, bt_phi_yx]
-                bt_phi_yx.points_inte = [bt_rho_xy, bt_rho_yx, bt_phi_xy]
+                bt_IZ_xx = PointPlotCirc(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[7][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                bt_IZ_xx.cor = file_pplt.obj_pplt.color
+                bt_IZ_xx.height = 4
+                bt_IZ_xx.width = 4
+
+                bt_RZ_xy = PointPlot(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[8][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                bt_RZ_xy.cor = file_pplt.obj_pplt.color
+                bt_RZ_xy.height = 4
+                bt_RZ_xy.width = 4
+
+                bt_IZ_xy = PointPlotCirc(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[9][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                bt_IZ_xy.cor = file_pplt.obj_pplt.color
+                bt_IZ_xy.height = 4
+                bt_IZ_xy.width = 4
+
+                bt_RZ_yx = PointPlot(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[10][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                bt_RZ_yx.cor = file_pplt.obj_pplt.color
+                bt_RZ_yx.height = 4
+                bt_RZ_yx.width = 4
+
+                bt_IZ_yx = PointPlotCirc(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[11][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                bt_IZ_yx.cor = file_pplt.obj_pplt.color
+                bt_IZ_yx.height = 4
+                bt_IZ_yx.width = 4
+
+                bt_RZ_yy = PointPlot(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[12][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                bt_RZ_yy.cor = file_pplt.obj_pplt.color
+                bt_RZ_yy.height = 4
+                bt_RZ_yy.width = 4
+
+                bt_IZ_yy = PointPlotCirc(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[13][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                bt_IZ_yy.cor = file_pplt.obj_pplt.color
+                bt_IZ_yy.height = 4
+                bt_IZ_yy.width = 4
+
+                bt_rho_xy.points_inte = [bt_rho_yx, bt_phi_xy, bt_phi_yx, bt_RZ_xx, bt_IZ_xx, bt_RZ_xy, bt_IZ_xy, bt_RZ_yx, bt_IZ_yx, bt_RZ_yy, bt_IZ_yy]
+                bt_rho_yx.points_inte = [bt_rho_xy, bt_rho_xy, bt_phi_yx, bt_RZ_xx, bt_IZ_xx, bt_RZ_xy, bt_IZ_xy, bt_RZ_yx, bt_IZ_yx, bt_RZ_yy, bt_IZ_yy]
+
+                bt_phi_xy.points_inte = [bt_rho_xy, bt_rho_yx, bt_phi_yx, bt_RZ_xx, bt_IZ_xx, bt_RZ_xy, bt_IZ_xy, bt_RZ_yx, bt_IZ_yx, bt_RZ_yy, bt_IZ_yy]
+                bt_phi_yx.points_inte = [bt_rho_xy, bt_rho_yx, bt_phi_xy, bt_RZ_xx, bt_IZ_xx, bt_RZ_xy, bt_IZ_xy, bt_RZ_yx, bt_IZ_yx, bt_RZ_yy, bt_IZ_yy]
+
+                bt_RZ_xx.points_inte = [bt_rho_xy, bt_rho_yx, bt_phi_xy, bt_phi_yx, bt_IZ_xx, bt_RZ_xy, bt_IZ_xy, bt_RZ_yx, bt_IZ_yx, bt_RZ_yy, bt_IZ_yy]
+                bt_IZ_xx.points_inte = [bt_rho_xy, bt_rho_yx, bt_phi_xy, bt_phi_yx, bt_RZ_xx, bt_RZ_xy, bt_IZ_xy, bt_RZ_yx, bt_IZ_yx, bt_RZ_yy, bt_IZ_yy]
+
+                bt_RZ_xy.points_inte = [bt_rho_xy, bt_rho_yx, bt_phi_xy, bt_phi_yx, bt_RZ_xx, bt_IZ_xx, bt_IZ_xy, bt_RZ_yx, bt_IZ_yx, bt_RZ_yy, bt_IZ_yy]
+                bt_IZ_xy.points_inte = [bt_rho_xy, bt_rho_yx, bt_phi_xy, bt_phi_yx, bt_RZ_xx, bt_IZ_xx, bt_RZ_xy, bt_RZ_yx, bt_IZ_yx, bt_RZ_yy, bt_IZ_yy]
+
+                bt_RZ_yx.points_inte = [bt_rho_xy, bt_rho_yx, bt_phi_xy, bt_phi_yx, bt_RZ_xx, bt_IZ_xx, bt_RZ_xy, bt_IZ_xy, bt_IZ_yx, bt_RZ_yy, bt_IZ_yy]
+                bt_IZ_yx.points_inte = [bt_rho_xy, bt_rho_yx, bt_phi_xy, bt_phi_yx, bt_RZ_xx, bt_IZ_xx, bt_RZ_xy, bt_IZ_xy, bt_RZ_yx, bt_RZ_yy, bt_IZ_yy]
+
+                bt_RZ_yy.points_inte = [bt_rho_xy, bt_rho_yx, bt_phi_xy, bt_phi_yx, bt_RZ_xx, bt_IZ_xx, bt_RZ_xy, bt_IZ_xy, bt_RZ_yx, bt_IZ_yx, bt_IZ_yy]
+                bt_IZ_yy.points_inte = [bt_rho_xy, bt_rho_yx, bt_phi_xy, bt_phi_yx, bt_RZ_xx, bt_IZ_xx, bt_RZ_xy, bt_IZ_xy, bt_RZ_yx, bt_IZ_yx, bt_RZ_yy]
+
 
                 if T:
                     bt_rho_xy.select()
@@ -514,10 +568,28 @@ class ScreenSuper(BoxLayout):
                     bt_phi_xy.select()
                     bt_phi_yx.select()
 
+                    bt_RZ_xx.select()
+                    bt_IZ_xx.select()
+                    bt_RZ_xy.select()
+                    bt_IZ_xy.select()
+                    bt_RZ_yx.select()
+                    bt_IZ_yx.select()
+                    bt_RZ_yy.select()
+                    bt_IZ_yy.select()
+
+
                     self.ids.plot_1_point.add_widget(bt_rho_xy)
                     self.ids.plot_1_point.add_widget(bt_rho_yx)
                     self.ids.plot_1_point.add_widget(bt_phi_xy)
                     self.ids.plot_1_point.add_widget(bt_phi_yx)
+                    self.ids.plot_2_point.add_widget(bt_RZ_xx)
+                    self.ids.plot_2_point.add_widget(bt_IZ_xx)
+                    self.ids.plot_2_point.add_widget(bt_RZ_xy)
+                    self.ids.plot_2_point.add_widget(bt_IZ_xy)
+                    self.ids.plot_2_point.add_widget(bt_RZ_yx)
+                    self.ids.plot_2_point.add_widget(bt_IZ_yx)
+                    self.ids.plot_2_point.add_widget(bt_RZ_yy)
+                    self.ids.plot_2_point.add_widget(bt_IZ_yy)
                 i += 1
             j += 1
 
@@ -547,6 +619,8 @@ class ScreenSuper(BoxLayout):
             self.list_bt_plot = []
 
             self.ids.plot_1_point.clear_widgets()
+            self.ids.plot_2_point.clear_widgets()
+
             self.list_active_file_pplt = []
 
             self.lay_select = LaySelectPlot()
@@ -582,7 +656,45 @@ class ScreenSuper(BoxLayout):
                     bt_phi_yx.height = 4
                     bt_phi_yx.width = 4
 
+                    bt_RZ_xx = PointPlot(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[6][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                    bt_RZ_xx.cor = file_pplt.obj_pplt.color
+                    bt_RZ_xx.height = 4
+                    bt_RZ_xx.width = 4
 
+                    bt_IZ_xx = PointPlotCirc(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[7][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                    bt_IZ_xx.cor = file_pplt.obj_pplt.color
+                    bt_IZ_xx.height = 4
+                    bt_IZ_xx.width = 4
+
+                    bt_RZ_xy = PointPlot(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[8][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                    bt_RZ_xy.cor = file_pplt.obj_pplt.color
+                    bt_RZ_xy.height = 4
+                    bt_RZ_xy.width = 4
+
+                    bt_IZ_xy = PointPlotCirc(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[9][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                    bt_IZ_xy.cor = file_pplt.obj_pplt.color
+                    bt_IZ_xy.height = 4
+                    bt_IZ_xy.width = 4
+
+                    bt_RZ_yx = PointPlot(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[10][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                    bt_RZ_yx.cor = file_pplt.obj_pplt.color
+                    bt_RZ_yx.height = 4
+                    bt_RZ_yx.width = 4
+
+                    bt_IZ_yx = PointPlotCirc(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[11][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                    bt_IZ_yx.cor = file_pplt.obj_pplt.color
+                    bt_IZ_yx.height = 4
+                    bt_IZ_yx.width = 4
+
+                    bt_RZ_yy = PointPlot(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[12][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                    bt_RZ_yy.cor = file_pplt.obj_pplt.color
+                    bt_RZ_yy.height = 4
+                    bt_RZ_yy.width = 4
+
+                    bt_IZ_yy = PointPlotCirc(pos=[coor_pixel_file_pplt[5][i], coor_pixel_file_pplt[13][i]], file_pplt=file_pplt.obj_pplt, i=i)
+                    bt_IZ_yy.cor = file_pplt.obj_pplt.color
+                    bt_IZ_yy.height = 4
+                    bt_IZ_yy.width = 4
 
 
                     if T:
@@ -591,14 +703,42 @@ class ScreenSuper(BoxLayout):
                         bt_phi_xy.select()
                         bt_phi_yx.select()
 
+                        bt_RZ_xx.select()
+                        bt_IZ_xx.select()
+
+                        bt_RZ_xy.select()
+                        bt_IZ_xy.select()
+
+                        bt_RZ_yx.select()
+                        bt_IZ_yx.select()
+
+                        bt_RZ_yy.select()
+                        bt_IZ_yy.select()
+
                     self.ids.plot_1_point.add_widget(bt_rho_xy)
                     self.ids.plot_1_point.add_widget(bt_rho_yx)
                     self.ids.plot_1_point.add_widget(bt_phi_xy)
                     self.ids.plot_1_point.add_widget(bt_phi_yx)
+                    self.ids.plot_2_point.add_widget(bt_RZ_xx)
+                    self.ids.plot_2_point.add_widget(bt_IZ_xx)
+                    self.ids.plot_2_point.add_widget(bt_RZ_xy)
+                    self.ids.plot_2_point.add_widget(bt_IZ_xy)
+                    self.ids.plot_2_point.add_widget(bt_RZ_yx)
+                    self.ids.plot_2_point.add_widget(bt_IZ_yx)
+                    self.ids.plot_2_point.add_widget(bt_RZ_yy)
+                    self.ids.plot_2_point.add_widget(bt_IZ_yy)
                     self.list_bt_plot.append(bt_rho_xy)
                     self.list_bt_plot.append(bt_rho_yx)
                     self.list_bt_plot.append(bt_phi_xy)
                     self.list_bt_plot.append(bt_phi_yx)
+                    self.list_bt_plot.append(bt_RZ_xx)
+                    self.list_bt_plot.append(bt_IZ_xx)
+                    self.list_bt_plot.append(bt_RZ_xy)
+                    self.list_bt_plot.append(bt_IZ_xy)
+                    self.list_bt_plot.append(bt_RZ_yx)
+                    self.list_bt_plot.append(bt_IZ_yx)
+                    self.list_bt_plot.append(bt_RZ_yy)
+                    self.list_bt_plot.append(bt_IZ_yy)
 
                     i += 1
 
@@ -622,6 +762,8 @@ class ScreenSuper(BoxLayout):
         phixy = [[], []]
         phiyx = [[], []]
 
+        TZ = []
+
         RZxx = []
         RZxy = []
         RZyx = []
@@ -632,6 +774,8 @@ class ScreenSuper(BoxLayout):
         IZyx = []
         IZyy = []
 
+        for period in file_pplt.obj_pplt.T:
+            T.append(coorlog_to_pixel(coor=period, v0=self.x0rho, fzoom=self.fzoomrho, exp_min=4))
 
         for rho in file_pplt.obj_pplt.rhoxy[0]:
             rhoxy.append(coorlog_to_pixel(coor=rho, v0=self.y0rho, fzoom=self.fzoomrho, exp_min=self.min_exp_rho))
@@ -652,9 +796,35 @@ class ScreenSuper(BoxLayout):
             i += 1
 
         for period in file_pplt.obj_pplt.T:
-            T.append(coorlog_to_pixel(coor=period, v0=self.x0rho, fzoom=self.fzoomrho, exp_min=4))
+            TZ.append(coorlog_to_pixel(coor=period, v0=self.ids.plot_2.x + 20, fzoom=self.fzoomZ, exp_min=4))
 
-        return T, rhoxy, rhoyx, phixy, phiyx
+        for RZ in file_pplt.obj_pplt.RZxx[0]:
+            RZxx.append(int((self.ids.plot_2.x+20) + self.fzoomyZ*(15 + RZ)+840))
+
+        for IZ in file_pplt.obj_pplt.IZxx[0]:
+            IZxx.append(int((self.ids.plot_2.x+20) + self.fzoomyZ*(15 + IZ)+840))
+
+        for RZ in file_pplt.obj_pplt.RZxy[0]:
+            RZxy.append(int((self.ids.plot_2.x+20) + self.fzoomyZ*(15 + RZ)+570))
+
+        for IZ in file_pplt.obj_pplt.IZxy[0]:
+            IZxy.append(int((self.ids.plot_2.x+20) + self.fzoomyZ*(15 + IZ)+570))
+
+        for RZ in file_pplt.obj_pplt.RZyx[0]:
+            RZyx.append(int((self.ids.plot_2.x+20) + self.fzoomyZ*(15 + RZ)+300))
+
+        for IZ in file_pplt.obj_pplt.IZyx[0]:
+            IZyx.append(int((self.ids.plot_2.x+20) + self.fzoomyZ*(15 + IZ)+300))
+
+        for RZ in file_pplt.obj_pplt.RZyy[0]:
+            RZyy.append(int((self.ids.plot_2.x+20) + self.fzoomyZ*(15 + RZ)+30))
+
+        for IZ in file_pplt.obj_pplt.IZyy[0]:
+            IZyy.append(int((self.ids.plot_2.x+20) + self.fzoomyZ*(15 + IZ)+30))
+
+
+
+        return T, rhoxy, rhoyx, phixy, phiyx, TZ, RZxx, IZxx, RZxy, IZxy, RZyx, IZyx, RZyy, IZyy
 
 
     def set_color_ok(self):

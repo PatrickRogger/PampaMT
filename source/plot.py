@@ -450,7 +450,7 @@ def draws_lines_Z(x0, y0, dx, dy, fzoom,fzoomy, border, xmin, xmax, ymin, ymax, 
     lb_title.center_x = int((lb_title.width/2) + x0) - 25
     lb_title.center_y = yf + 15
 
-    lay.add_widget(lb_title)
+    #lay.add_widget(lb_title)
 
     if label_y == True:
 
