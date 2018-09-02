@@ -27,6 +27,7 @@ import sys
 import time
 from timeit import default_timer as timer
 import threading
+import pygame
 
 # API Kivy Minimum Requirement
 kivy.require('1.9.0')
@@ -789,6 +790,9 @@ class Screen(FloatLayout):
                 print('Convertendo ... ats2asc --site-name ' + site.name + ' ../../DADOS_MT/' + site.name)
                 site.ats2asc = True
 
+                site.coordinates = read_ats_coordinates('../../DADOS_MT/' + site.project + '/' + site.name)
+                print(lang['Saving_Coordinates'] + site.name)
+
                 self.project.sites = self.list_sites
                 #self.project.save()
                 save(self.project)
@@ -900,8 +904,8 @@ class Screen(FloatLayout):
         print(unit_progress_bar)
         for site in list_site:
 
-            site.coordinates = read_ats_coordinates('../../DADOS_MT/' + site.project + '/' + site.name)
-            print(lang['Saving_Coordinates'] + site.name)
+            # site.coordinates = read_ats_coordinates('../../DADOS_MT/' + site.project + '/' + site.name)
+            # print(lang['Saving_Coordinates'] + site.name)
             self.lb_finish.text = lang['Saving_Coordinates'] + site.name
             #time.sleep(0.8)
 
@@ -909,6 +913,8 @@ class Screen(FloatLayout):
             self.progress_bar_finish.value += unit_progress_bar
 
         self.lb_finish.text = 'Finish    Opening PampaMT... '
+
+
         self.open_pampamt()
 
     def search_zss_file(self, site):
@@ -1037,6 +1043,7 @@ class DiagMain(App):
 
 
 window = DiagMain()
+window.icon = user + '/.PampaMT/image/icon.png'
 window.title = lang['Welcome_to_PampaMT']
 Window.size = 800, 500
 

@@ -24,6 +24,8 @@ import glob
 import sys
 import threading
 from time import sleep
+import pygame
+from shutil import copyfile
 
 # Api Kivy Minimum Requirement
 kivy.require('1.9.0')
@@ -62,6 +64,8 @@ from kivy.properties import ObjectProperty
 # Packages import Widgets
 from kivy.uix.label import Label
 from kivy.uix.button import Button
+from kivy.uix.modalview import ModalView
+from kivy.uix.textinput import TextInput
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 
 # Packages import Layout
@@ -76,7 +80,7 @@ from math import sqrt
 from source.site import Site
 from source.windowsite import FilePPLT, make_file_pplt, save_file_pplt
 from source.project import ProjectPPMT, read_ppmt_file, ErrorLoading, save
-
+from source.tools.sorted_t import sorted_t
 
 from source.plot import *
 
@@ -86,6 +90,8 @@ from source.kivy_pampamt.buttonpampamt import ButtonBlack
 arq_file_main_exec = open(user + '/.PampaMT/file/file_exec_main', 'r')
 path_file_ppmt = arq_file_main_exec.readline()
 arq_file_main_exec.close()
+
+
 
 try:
     project = read_ppmt_file(path_file_ppmt)
@@ -111,6 +117,7 @@ except NameError:
     site = project.sites[0]
     print('Site Select: ' + site.name)
 
+path_dir_ppmt = path_file_ppmt.replace('/' + project.name + '.ppmt', '')
 
 class LabelDivX(Label):
     pass
@@ -480,6 +487,8 @@ class ScreenSuper(BoxLayout):
                 if file_pplt.active == True:
                     self.list_active_file_pplt.append(file_pplt)
 
+        self.list_bt_plot = []
+
         self.box_view_select.clear_widgets()
         j = 0
         for file_pplt in self.list_active_file_pplt:
@@ -489,6 +498,7 @@ class ScreenSuper(BoxLayout):
 
                 bt_rho_xy = PointPlot(pos=[coor_pixel_file_pplt[0][i], coor_pixel_file_pplt[1][i]], file_pplt=file_pplt.obj_pplt, i=i)
                 bt_rho_xy.cor = file_pplt.obj_pplt.color
+                bt_rho_xy.n = i+1
 
                 bt_rho_yx = PointPlotCirc(pos=[coor_pixel_file_pplt[0][i], coor_pixel_file_pplt[2][i]], file_pplt=file_pplt.obj_pplt, i=i)
                 bt_rho_yx.cor = file_pplt.obj_pplt.color
@@ -590,6 +600,8 @@ class ScreenSuper(BoxLayout):
                     self.ids.plot_2_point.add_widget(bt_IZ_yx)
                     self.ids.plot_2_point.add_widget(bt_RZ_yy)
                     self.ids.plot_2_point.add_widget(bt_IZ_yy)
+
+                    self.list_bt_plot.append(bt_rho_xy)
                 i += 1
             j += 1
 
@@ -854,6 +866,107 @@ class ScreenSuper(BoxLayout):
             self.ids.progress_bar.value = i
 
 
+    def close_selected_two_equal_periods(self):
+        sleep(3)
+        self.ids.plot_1.remove_widget(self.bt_select_two)
+
+    def on_press_bt_selected_two_equal_periods(self):
+        popup = ModalView(size_hint=(None,None))
+        popup.add_widget(Label(text=lang['Selected_two_equal_periods'],size_hint=(None,None),height=30, width=300))
+        popup.height = 40
+        popup.width = 300
+        popup.open()
+        print('selected two equal periods')
+
+    def tojones(self):
+
+        self.popup_tojones.dismiss()
+        os.system('tojones final/' + site.name +'/selection.dat > final/' + self.tb_jones.text)
+
+        if os.path.isdir(path_dir_ppmt + '/jones_dat'):
+            pass
+        else:
+            os.mkdir(path_dir_ppmt + '/jones_dat')
+
+        copyfile('final/' + self.tb_jones.text, path_dir_ppmt + '/jones_dat/' + self.tb_jones.text)
+
+
+
+    def on_press_tojones(self):
+        if os.path.isdir(user + '/PampaMT/PROC_MT/' + project.name + '/final/' + site.name):
+            print('final/site existe')
+        else:
+            os.mkdir(user + '/PampaMT/PROC_MT/' + project.name + '/final/' + site.name)
+            print('Make /final/' + site.name)
+
+        arq_file_select_periods = open(user + '/PampaMT/PROC_MT/'+ project.name + '/final/' + site.name + '/selection.dat', 'w')
+
+        #print(self.list_bt_plot)
+
+        line_write_0 = '# coord {:.5f} {:.5f} {:.0f}\n'.format(site.coordinates['Longitude'], site.coordinates['Latitude'], site.coordinates['Elevation'])
+        #print(line_write_0)
+
+        arq_file_select_periods.writelines(line_write_0)
+
+        status, list_sorted_plot, bt_plot_error = sorted_t(self.list_bt_plot)
+        #print(list_sorted_plot)
+
+        if status == True:
+            print('Error Tojones')
+            self.bt_select_two = Button(text='!', size_hint=(None, None))
+            self.bt_select_two.on_press = self.on_press_bt_selected_two_equal_periods
+            self.bt_select_two.height = 10
+            self.bt_select_two.width = 10
+            self.bt_select_two.center_x = bt_plot_error.x
+            self.bt_select_two.center_y = bt_plot_error.y + 30
+
+            self.ids.plot_1.add_widget(self.bt_select_two)
+            arq_file_select_periods.close()
+            close_bt_select_two = threading.Thread(target=self.close_selected_two_equal_periods)
+            close_bt_select_two.start()
+        else:
+            for bt_plot in list_sorted_plot:
+
+                line_write = bt_plot.obj_file.rate + '/' + bt_plot.obj_file.name + ' [' + str(bt_plot.n) + '-' +  str(bt_plot.n) + ']\n'
+                arq_file_select_periods.writelines(line_write)
+
+            arq_file_select_periods.close()
+
+            self.popup_tojones = ModalView(size_hint=(None,None))
+            self.popup_tojones.height = 90
+            self.popup_tojones.width = 320
+
+            lay = BoxLayout(size_hint=(None, None), height=70, width=300)
+            lay.orientation = 'vertical'
+
+            lay.spacing = 5
+            self.tb_jones = TextInput()
+            self.tb_jones.text = site.name + '.dat'
+            self.tb_jones.multiline = False
+            self.tb_jones.on_text_validate = self.tojones
+            lay.add_widget(self.tb_jones)
+
+            bt_save_jones = Button(text=lang['Save'])
+            bt_save_jones.on_press = self.tojones
+            lay.add_widget(bt_save_jones)
+
+
+            self.popup_tojones.add_widget(lay)
+            self.popup_tojones.open()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -943,6 +1056,7 @@ class PampaMT(App):
         return ScreenSuper()
 
 window = PampaMT()
+window.icon = user + '/.PampaMT/image/icon.png'
 window.title = 'PampaMT -- ' + project.name
 Window.size = 1200, 750
 
