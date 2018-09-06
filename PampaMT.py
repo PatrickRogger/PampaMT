@@ -56,6 +56,13 @@ arq_lang.close()
 #       bl_...   -> Label()
 #       lay_...  -> Layout()
 
+print('Opening Log ...')
+arq_log = open('dic/logNot_' + set_lang, 'rb')
+logNot = pickle.load(arq_log)
+arq_log.close()
+
+
+
 # Packages import GUI
 from kivy.app import App
 from kivy.core.window import Window
@@ -65,6 +72,7 @@ from kivy.properties import ObjectProperty
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.modalview import ModalView
+from kivy.uix.popup import Popup
 from kivy.uix.textinput import TextInput
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 
@@ -436,6 +444,16 @@ class ScreenSuper(BoxLayout):
         os.chdir(user + '/.PampaMT')
         os.system('./PampaMT.py')
 
+    def open_not_implemented(self, log, pop_width, pop_height):
+        pop = Popup(title=lang['Not_yet_implemented'])
+        pop.size_hint = None, None
+        pop.width = pop_width
+        pop.height = pop_height
+        pop.content = Label(text=logNot[log])
+        pop.open()
+
+
+
     press_box_set_color = True
     def on_press_set_color(self):
 
@@ -615,6 +633,7 @@ class ScreenSuper(BoxLayout):
             self.box_view_select.add_widget(lb_view_select)
             self.box_view_select.add_widget(LabelDivX())
         self.box_view_select.height = int(j*31)
+
     test_press_select_period = False
     test_press_select_period_plot = True
     def on_press_select_period(self):
