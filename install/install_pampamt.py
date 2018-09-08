@@ -81,6 +81,7 @@ def install():
         os.system('rm modelo.tar.xf')
 
     else:
+        print("Copy the file 'modelo.tar.xf' to " + user)
         print('Please contact Patrick Rogger Garcia to obtain the processing model (modelo.tar.xf)')
         print('E-mail: patrick_rogger@hotmail.com')
         exit()
