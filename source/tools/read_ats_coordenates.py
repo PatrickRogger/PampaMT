@@ -40,9 +40,18 @@ def read_ats_coordinates(path_ats_files):
             list_elevation.append(elev)
 
     # Returns the Mean of lists
-    Coordinates = {}
-    Coordinates['Latitude'] = sum(list_latitude) / len(list_latitude)
-    Coordinates['Longitude'] = sum(list_longitude) / len(list_longitude)
-    Coordinates['Elevation'] = sum(list_elevation) / len(list_elevation)
+
+    try:
+
+        Coordinates = {}
+        Coordinates['Latitude'] = sum(list_latitude) / len(list_latitude)
+        Coordinates['Longitude'] = sum(list_longitude) / len(list_longitude)
+        Coordinates['Elevation'] = sum(list_elevation) / len(list_elevation)
+
+    except ZeroDivisionError:
+        Coordinates = {}
+        Coordinates['Latitude'] = 0
+        Coordinates['Longitude'] = 0
+        Coordinates['Elevation'] = 0
 
     return Coordinates
