@@ -518,6 +518,7 @@ class Screen(FloatLayout):
     path_new_project = ''
 
     def new_project(self):
+
         self.open_project_key = False
         self.lay_center.clear_widgets()
         self.clear_widgets()
@@ -691,6 +692,8 @@ class Screen(FloatLayout):
         self.popup_copy_site = PopUpLoading(title_pop=title_pop, lang_seconds=lang_seconds,
                                             lang_minutes=lang_minutes, lang_cancel=lang_cancel, cancel=self.cancel_copy)
         self.popup_copy_site.num_max = num_sites
+
+
         self.popup_copy_site.open()
 
         self.popup_copy_site.papallel_start(self.copy_sites)
@@ -957,7 +960,7 @@ class Screen(FloatLayout):
             return files_zss, files_plot
 
     def openPampaMT(self, project):
-
+        
         self.clear_widgets()
 
         self.add_widget(self.image_back_ground)
@@ -1026,6 +1029,8 @@ class Screen(FloatLayout):
 
         self.lay_center.add_widget(self.lay_last_project)
         self.add_widget(self.lay_center)
+
+
 
         # teste
         #self.openPampaMT(ProjectTeste())
