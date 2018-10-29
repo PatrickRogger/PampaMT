@@ -89,6 +89,7 @@ from source.site import Site
 from source.windowsite import FilePPLT, make_file_pplt, save_file_pplt
 from source.project import ProjectPPMT, read_ppmt_file, ErrorLoading, save
 from source.tools.sorted_t import sorted_t
+from source.tools.plotZ import export_matplotlib_jones
 
 from source.plot import *
 

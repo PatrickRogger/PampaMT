@@ -1,4 +1,5 @@
 #: import o os
+#: import plotz source.tools.plotZ
 
 <LabelDivX@Label>:
     size_hint_y: None
@@ -135,7 +136,7 @@
 
                 ActionButton:
                     text: root.lang_figure_station
-                    on_press: root.open_not_implemented('Log_figure_station', 300, 100)
+                    on_press: plotz.export_matplotlib_jones(root.lang_site_edit)
 
             ActionGroup:
                 text: root.lang_help
