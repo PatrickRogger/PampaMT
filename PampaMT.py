@@ -452,7 +452,8 @@ class ScreenSuper(BoxLayout):
         pop.content = Label(text=logNot[log])
         pop.open()
 
-
+    def open_rhoplus(self):
+        os.system('rhoplusGUI')
 
     press_box_set_color = True
     def on_press_set_color(self):
@@ -1077,7 +1078,7 @@ class PampaMT(App):
 window = PampaMT()
 window.icon = user + '/.PampaMT/image/icon.png'
 window.title = 'PampaMT -- ' + project.name
-Window.size = 1200, 750
+Window.size = 1300, 750
 
 
 if __name__ == '__main__':
