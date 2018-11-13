@@ -44,7 +44,11 @@ else:
     perm_install = input('Do you want to install PampaMT? (Y/n): ')
     if perm_install in ['Y', 'y', 'S', 's']:
 
-        os.system('sudo apt-get install git python-kivy python3-kivy python3-matplotlib')# python-dev libsdl2{,-image,-mixer,-ttf}-dev')
+        os.system('sudo apt-get install git python3-matplotlib')# python-dev libsdl2{,-image,-mixer,-ttf}-dev')
+        os.system('sudo add-apt-repository ppa:kivy-team/kivy-daily')
+        os.system('sudo apt-get install python3-kivy')
+        os.system('sudo apt-get install libsdl2-dev')
+        os.system('sudo apt-get install libsdl2-image-dev')
 
         print('\n')
         print('Will be downloader from PampaMT (GitHub)')
