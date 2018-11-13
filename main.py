@@ -27,7 +27,7 @@ import sys
 import time
 from timeit import default_timer as timer
 import threading
-import pygame
+#import pygame
 
 # API Kivy Minimum Requirement
 kivy.require('1.9.0')

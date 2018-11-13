@@ -24,7 +24,7 @@ import glob
 import sys
 import threading
 from time import sleep
-import pygame
+#import pygame
 from shutil import copyfile
 
 # Api Kivy Minimum Requirement

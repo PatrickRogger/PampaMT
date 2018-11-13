@@ -38,13 +38,13 @@ if os.path.isdir(user + '/.PampaMT'):
 else:
     print('The PampaMT is a Software to pre-processing MT data.\n'
           'The following packages will be installed:\n'
-          'git, python-kivy, python3-kivy,  python3-dev, libsdl2{,-image,-mixer,-ttf}-dev\n'
+          'git, python-kivy, python3-kivy,  python3-dev, libsdl2{,-image,-mixer,-ttf}-dev python3-matplotlib\n'
           '\n'
           'If your Ubuntu version is 17 or 18, will be installed the developed version')
     perm_install = input('Do you want to install PampaMT? (Y/n): ')
     if perm_install in ['Y', 'y', 'S', 's']:
 
-        os.system('sudo apt-get install git python-kivy python3-kivy python3-pygame')# python-dev libsdl2{,-image,-mixer,-ttf}-dev')
+        os.system('sudo apt-get install git python-kivy python3-kivy python3-matplotlib')# python-dev libsdl2{,-image,-mixer,-ttf}-dev')
 
         print('\n')
         print('Will be downloader from PampaMT (GitHub)')
